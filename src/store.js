@@ -6,19 +6,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		count: 0
+		fibResult: 0,
+		fibArray: [0]
 	},
 	mutations: {
-		setCount(state, payload){
-			state.count += payload
+		returnFib(state, payload){
+			state.fibResult = payload
+		},
+		returnFibArray(state, payload){
+			state.fibArray = payload
 		}
 	},
 	actions: {
-		createBigCount: async function(context, payload){
-			// context.commit('setCount', payload)
+		findFib: async function(context, payload){
 			let instance = worker()	
-			let newCount = await instance.expensive(payload)
-			context.commit('setCount', newCount)
+			let result = await instance.fibonacci(payload)
+			context.commit('returnFib', result[0])
+			context.commit('returnFibArray', result[1])
 		}
 	}
 })

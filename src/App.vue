@@ -1,8 +1,20 @@
 <template>
   <div id="app">
-    <h1>{{count}}</h1>
-    <input type="number" v-model.number="amount" />
-    <button @click="loadBigCount">Add Amount To The Count</button>
+
+    <p><label name="amount"></label><input name="amount" type="number" v-model.number="amount" />
+    </p>
+    <button @click="loadBigCount">Calculate Fibonacci Sequence For {{amount}}</button>
+
+    <div id="results" v-if="countLoaded">
+      <h2 >Fibonacci Sequence at positon {{amount}} <br />{{fibResult}}</h2>
+      
+
+      <details>
+        <summary>See full sequence through {{amount}}</summary> 
+          <li v-for="(item, index) in fibArray" :key="index">{{item}}
+        </li>
+      </details>
+    </div>
   </div>
 </template>
 
@@ -13,17 +25,29 @@ export default {
   name: 'app',
   data(){
     return {
-      amount: 0
+      amount: 0,
+      countLoaded: false
     }
   },
   components: {
   },
   computed: {
-    ...mapState(['count'])
+    ...mapState(['fibResult', 'fibArray'])
   },
   methods: {
     loadBigCount(){
-      this.$store.dispatch('createBigCount', this.amount)
+      console.log('amount', this.amount)
+      this.$store.dispatch('findFib', this.amount)
+    }
+  },
+  watch: {
+    fibResult(data){
+      this.countLoaded = true
+    },
+    amount(data, oldData){
+      if (data !== oldData) {
+        this.countLoaded = false
+      }
     }
   }
 }
@@ -37,5 +61,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+li {
+  list-style-type: none;
 }
 </style>
