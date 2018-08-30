@@ -1,4 +1,4 @@
- export function fibonacci(number) {
+export function fibonacci(number) {
 
  	let newNum = fibo(number-1)
  	console.log(newNum)
