@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "start": "npm run serve"
   },
   "dependencies": {
     "vue": "^2.5.17",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "worker-loader": "^2.0.0",
+    "workerize-loader": "^1.0.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",

@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>{{count}}</h1>
+    <input type="number" v-model.number="amount" />
+    <button @click="loadBigCount">Add Amount To The Count</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import HelloWorld from './components/HelloWorld.vue'
+import {mapState} from 'vuex'
 export default {
   name: 'app',
+  data(){
+    return {
+      amount: 0
+    }
+  },
   components: {
-    HelloWorld
+  },
+  computed: {
+    ...mapState(['count'])
+  },
+  methods: {
+    loadBigCount(){
+      this.$store.dispatch('createBigCount', this.amount)
+    }
   }
 }
 </script>
