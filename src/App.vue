@@ -1,16 +1,21 @@
 <template>
   <div id="app">
+    <Box />
     <FibCalc />
   </div>
 </template>
 
 <script>
+
+import Box from './components/Box.vue'
 import FibCalc from './components/FibCalc.vue'
 import {mapState} from 'vuex'
+
 export default {
   name: 'app',
   components: {
-    FibCalc
+    FibCalc,
+    Box
   }
 
 }
@@ -24,7 +29,4 @@ export default {
   text-align: center;
 }
 
-li {
-  list-style-type: none;
-}
 </style>
